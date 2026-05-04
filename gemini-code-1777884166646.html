@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Mr. Donar | مستر دونر</title>
+    <meta name="description" content="مستر دونر - مطعم الشاورما الأول. تواصل معنا، تصفح المنيو الخاص بنا، وتابعنا على وسائل التواصل الاجتماعي.">
+    <meta name="keywords" content="Mr Donar, مستر دونر, شاورما, مطعم, منيو, دمشق, سوريا, وجبات سريعة, دونر">
+    <meta name="author" content="Mr. Donar">
+
+    <!-- Open Graph / Social Media Sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://Mr-donar.com/">
+    <meta property="og:title" content="Mr. Donar | مستر دونر">
+    <meta property="og:description" content="مستر دونر - مطعم الشاورما الأول. تواصل معنا وتصفح المنيو الخاص بنا.">
+    <meta property="og:image" content="logo.jpeg">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+       body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            
+            /* -- أكواد الباتيرن -- */
+            background-color: #000000; /* لون خلفية احتياطي */
+            background-image: url('pattern.png'); /* ضع اسم صورة الباتيرن هنا */
+            background-repeat: repeat; /* هذا الأمر هو ما يجعل الصورة تتكرر كباتيرن */
+            background-size: 150px; /* للتحكم بحجم الباتيرن (يمكنك تكبير أو تصغير الرقم) */
+            
+            /* إضافة طبقة داكنة فوق الباتيرن حتى لا يزعج العين (اختياري) */
+            box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.7); 
+            
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .logo-container {
+            margin-bottom: 50px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .logo-container img {
+            width: 250px;
+            max-width: 80vw;
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+            transition: 0.3s ease-in-out;
+        }
+
+        .logo-container img:hover {
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.3);
+            transform: scale(1.02);
+        }
+
+        .menu {
+            position: relative;
+            width: 240px;
+            height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+       .toggle {
+            position: relative;
+            height: 65px;
+            width: 65px;
+            background: #d4af37;
+            border-radius: 50%;
+            box-shadow: 0 3px 15px rgba(212, 175, 55, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            cursor: pointer;
+            transition: 0.5s; /* تسريع الحركة قليلاً لتكون أنعم */
+            z-index: 1000;
+            text-align: center;
+        }
+
+        /* تنسيق كلمة Click me */
+        .click-text {
+            position: absolute;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1.1;
+            transition: 0.3s;
+            font-family: Arial, sans-serif;
+        }
+
+        /* تنسيق أيقونة الإغلاق (مخفية في البداية) */
+        .close-icon {
+            position: absolute;
+            opacity: 0;
+            transform: scale(0);
+            transition: 0.3s;
+            display: flex;
+        }
+
+        /* دوران الزر عند الفتح */
+        .menu.active .toggle {
+            transform: rotate(180deg);
+        }
+
+        /* إخفاء الكلمة عند فتح القائمة */
+        .menu.active .click-text {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        /* إظهار علامة الإغلاق عند فتح القائمة */
+        .menu.active .close-icon {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+        .menu li {
+            position: absolute;
+            left: 0;
+            list-style: none;
+            transform-origin: 120px; 
+            transition: 0.5s;
+            transition-delay: calc(0.1s * var(--i));
+            transform: rotate(0deg) translateX(80px);
+        }
+
+   .menu.active li {
+            transform: rotate(calc((72deg * var(--i)) + 90deg));
+        }
+
+       .menu li a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: #fff;
+            border-radius: 50%;
+            transform: rotate(calc((-72deg * var(--i)) - 90deg));
+            color: var(--clr);
+            box-shadow: 0 3px 4px rgba(0,0,0,0.15);
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .menu li a:hover {
+            color: #fff;
+            background: var(--clr);
+            box-shadow: 0 0 10px var(--clr), 0 0 30px var(--clr);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo-container">
+        <!-- الشعار -->
+        <img src="logo.jpeg" alt="Mr. Donar Logo">
+    </div>
+
+    <ul class="menu">
+        <!-- زر المنتصف -->
+        <div class="toggle">
+            <span class="click-text">Click<br>me</span>
+            <span class="close-icon">
+                <svg viewBox="0 0 384 512" width="20" height="20"><path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+            </span>
+        </div>
+        
+        <!-- المنيو (أيقونة أدوات الطعام) -->
+        <li style="--i:0;--clr:#d4af37;">
+            <a href="https://Menu-r.Mr-donar.com" target="_blank" title="تصفح المنيو">
+                <svg viewBox="0 0 448 512" width="20" height="20"><path fill="currentColor" d="M416 0C400 0 288 32 288 176V288c0 35.3 28.7 64 64 64h32V480c0 17.7 14.3 32 32 32s32-14.3 32-32V352 24 0H416zM64 16C64 7.8 57.9 1 49.7 .1S34.2 4.6 32.4 12.5L2.1 148.8C.7 155.1 0 161.5 0 167.9c0 45.9 35.1 83.6 80 87.7V480c0 17.7 14.3 32 32 32s32-14.3 32-32V255.6c44.9-4.1 80-41.8 80-87.7c0-6.4-.7-12.8-2.1-19.1L191.6 12.5c-1.8-8-9.3-13.3-17.4-12.4S160 7.8 160 16V150.2c0 5.4-4.4 9.8-9.8 9.8c-5.1 0-9.3-3.9-9.8-9L127.9 14.6C127.2 6.3 120.3 0 112 0s-15.2 6.3-15.9 14.6L83.7 151c-.5 5.1-4.7 9-9.8 9c-5.4 0-9.8-4.4-9.8-9.8V16z"/></svg>
+            </a>
+        </li>
+        
+        <!-- واتساب -->
+        <li style="--i:1;--clr:#25d366;">
+            <a href="https://wa.me/963968800030" target="_blank" title="تواصل عبر واتساب">
+                <svg viewBox="0 0 448 512" width="22" height="22">
+                    <path fill="currentColor" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zM223.9 403.4c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                </svg>
+            </a>
+        </li>
+        
+        <!-- اتصال مباشر -->
+        <li style="--i:2;--clr:#007bff;">
+            <a href="tel:0968800030" title="اتصل بنا">
+                <svg viewBox="0 0 512 512" width="20" height="20"><path fill="currentColor" d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg>
+            </a>
+        </li>
+        
+        <!-- فيسبوك -->
+        <li style="--i:3;--clr:#1877f2;">
+            <a href="https://www.facebook.com/share/18wLXpFRWv/" target="_blank" title="صفحتنا على فيسبوك">
+                <svg viewBox="0 0 320 512" width="20" height="20"><path fill="currentColor" d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+            </a>
+        </li>
+        
+        <!-- انستغرام -->
+        <li style="--i:4;--clr:#E1306C;">
+            <a href="https://www.instagram.com/mister_donar?igsh=aWN5MjU3b2xtOHE5" target="_blank" title="صفحتنا على انستغرام">
+                <svg viewBox="0 0 448 512" width="22" height="22"><path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+            </a>
+        </li>
+    </ul>
+
+    <script>
+        let toggle = document.querySelector('.toggle');
+        let menu = document.querySelector('.menu');
+        
+        toggle.onclick = function() {
+            menu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
